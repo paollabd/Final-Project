@@ -14,7 +14,7 @@ export default function Feed() {
 	    let ColorNum2 = e.currentTarget.ColorNum2.value
 	    let ColorNum3 = e.currentTarget.ColorNum3.value
 	    let ColorNum4 = e.currentTarget.ColorNum4.value
-	    axios.get(`https://alteriormotive.herokuapp.com/submit-form?ColorNum1=${ColorNum1}&ColorNum2=${ColorNum2}&ColorNum3=${ColorNum3}&ColorNum4=${ColorNum4}`)
+	    axios.get(`https://alteriormotive.herokuapp.com/submit?ColorNum1=${ColorNum1}&ColorNum2=${ColorNum2}&ColorNum3=${ColorNum3}&ColorNum4=${ColorNum4}`)
 		.then(function(res) {
 	      // do something, maybe reroute
 	      setSubmitting(false);
