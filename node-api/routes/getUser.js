@@ -1,3 +1,11 @@
+/*
+* @Author: Paolla
+* @Date:   2019-12-12 13:35:49
+* @Last Modified by:   Paolla
+* @Last Modified time: 2019-12-12 14:04:32
+*/
+// getting a single user
+
 const express = require('express');
 const router = express.Router();
 const firebase = require('firebase');
@@ -13,25 +21,18 @@ var firebaseConfig = {
 	measurementId: "G-1WM6BX334N"
 };
 
-const firestoreDatabase = firebase.initializeApp(firebaseConfig);
-const bd = firestoreDatabase.firestore();
+if (!firebase.apps.length) {
+	firebase.initializeApp(firebaseConfig);
+}
+const db = firebase.firestore();
 
-let posts = [];
-bd.collection('userPosts').get()
-	.then(
-		blogPosts => {
-			blogPosts.forEach(post => { // returns the JSON file so we can dsiplay it on the web page
-				posts.push(post.data());
-				console.log('blogPosts', post.data());
-			})
-		}
-	)
-	.catch(err => {
-			console.log('error', err) 
-	})
-
-router.get('/', (req, res) => {
-	res.send(posts);
+router.get("/:id", (req, res) => {
+	let queryID = req.params.id;
+	db.collection("users").doc(queryID)
+	.get()
+	.then(doc => res.send(doc.data()))
+	.catch(error => res.send(error));
 })
 
 module.exports = router;
+

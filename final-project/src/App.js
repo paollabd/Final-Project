@@ -3,6 +3,7 @@ import { Redirect, Route, BrowserRouter as Router } from 'react-router-dom';
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import './App.css';
+import axios from "axios";
 
 import Header from "./components/Header";
 import Login from './pages/Login';
@@ -10,6 +11,7 @@ import UserProfile from './pages/UserProfile';
 import Signup from './pages/Signup';
 import Logout from './pages/Logout';
 import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
 
   var firebaseConfig = {
     apiKey: "AIzaSyAdJ7BqhuvwsCM6VYIxJmsF_V87WKz61AM",
@@ -51,7 +53,17 @@ function App() {
       }
     });
   }, [])
-
+  function colorUser(name, userId) {
+    axios.get(`https://alteriormotive.herokuapp.com/set-user?name=${name}&userId=${userId}`)
+        .then(function(response) {
+          console.log("yay", response);
+          return response;
+        })
+        .catch(function(error) {
+          console.log(error);
+          return error;
+        })
+  }
   function signupFunction(e) {
     e.preventDefault();
 
@@ -66,6 +78,7 @@ function App() {
       .createUserWithEmailAndPassword(email, password)
       .then(function(response) {
         setLoggedIn(true);
+        colorUser(name, response.user.uid);
       })
       .catch(function(error) {
         console.log('error', error);
@@ -111,6 +124,9 @@ function App() {
           </Route>
           <Route exact path="/signup">
            { loggedIn ? <Redirect to="/" /> : <Signup signupFunction={signupFunction}/>}
+          </Route>
+          <Route exact path="/about">
+           { loggedIn ? <AboutPage user={user} /> : <Redirect to="/about" /> }
           </Route>
           <Route exact path="/login">
            { loggedIn ? <Redirect to="/" /> : <Login loginFunction={loginFunction}/>}

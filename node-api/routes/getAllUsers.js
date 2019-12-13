@@ -1,3 +1,9 @@
+/*
+* @Author: Paolla
+* @Date:   2019-12-12 16:02:24
+* @Last Modified by:   Paolla
+* @Last Modified time: 2019-12-12 16:11:42
+*/
 const express = require('express');
 const router = express.Router();
 const firebase = require('firebase');
@@ -13,15 +19,17 @@ var firebaseConfig = {
 	measurementId: "G-1WM6BX334N"
 };
 
-const firestoreDatabase = firebase.initializeApp(firebaseConfig);
-const bd = firestoreDatabase.firestore();
+if (!firebase.apps.length) {
+	firebase.initializeApp(firebaseConfig);
+}
+const db = firebase.firestore();
 
-let posts = [];
-bd.collection('userPosts').get()
+let users = [];
+db.collection('users').get()
 	.then(
 		blogPosts => {
 			blogPosts.forEach(post => { // returns the JSON file so we can dsiplay it on the web page
-				posts.push(post.data());
+				users.push(post.data());
 				console.log('blogPosts', post.data());
 			})
 		}
@@ -31,7 +39,7 @@ bd.collection('userPosts').get()
 	})
 
 router.get('/', (req, res) => {
-	res.send(posts);
+	res.send(users);
 })
 
 module.exports = router;

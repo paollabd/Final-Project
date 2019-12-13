@@ -1,3 +1,9 @@
+/*
+* @Author: Paolla
+* @Date:   2019-12-12 13:35:59
+* @Last Modified by:   Paolla
+* @Last Modified time: 2019-12-12 13:50:30
+*/
 // File: /routes/submit.js
 
 const express = require('express');
@@ -23,39 +29,17 @@ const db = firebase.firestore();
 
 // set sample data to submit upon request
 const sampleData = {
-	title: 'Test',
-	text: 'Test Text',
-	author: 'Paolla Dutra'
+	name: 'Test Text',
+	userId: 'Paolla Dutra'
 }
 
-// test route
-router.get('/test', (req, res) => {
-	db.collection('userPosts')
-	  // setting and ID for the test doc
-	  .doc('test-doc')
-	  .set(sampleData)
-	  .then(function() {
-		  res.send("Document successfully written!");
-	  })
-	  .catch(function(error) {
-		  res.send("Error writing document: ", error);
-	});
-})
-
 router.get("/", (req,res) => {
-	let ColorNumOneVal = req.query.ColorNumOne ? req.query.ColorNumOne : '';
-	let ColorNumTwoVal = req.query.ColorNumTwo ? req.query.ColorNumTwo : '';
-	let ColorNumThreeVal = req.query.ColorNumThree ? req.query.ColorNumThree : '';
-	let ColorNumFourVal = req.query.ColorNumFour ? req.query.ColorNumFour : '';
 	let nameVal = req.query.name ? req.query.name : '';
+	let userIdVal = req.query.userId ? req.query.userId : '';
 
-	db.collection('userPosts')
-	.add({
-		ColorNumOne: ColorNumOneVal,
-		ColorNumTwo: ColorNumTwoVal,
-		ColorNumThree: ColorNumThreeVal,
-		ColorNumFour: ColorNumFourVal,
-		name: nameVal
+	db.collection('users').doc(userIdVal)
+	.set({
+		name: nameVal,
 	})
 	.then(ref => res.send(ref)) //send the data
 	.catch(e => res.send(e));

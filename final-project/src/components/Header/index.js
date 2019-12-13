@@ -10,6 +10,7 @@ export default function Header({ loggedIn, logoutFunction }) {
 				{loggedIn && <a href='/profile'>Profile</a>}
 				{!loggedIn && <a href='/login'>Log in</a>}
 				{!loggedIn && <a href='/signup'>Signup</a>}
+				{loggedIn && <a href='/about'>About</a>}
 				{loggedIn && <a onClick={() => logoutFunction()}>Logout</a>}
 			</nav>
 		</header>

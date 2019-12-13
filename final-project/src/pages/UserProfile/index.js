@@ -7,69 +7,52 @@ import "./style.css"
 
 
 export default function UserProfile({ user }) {
-
-	const axios = require('axios');
-
-	async function makePostRequest() {
-
-	    axios.post("https://alteriormotive.herokuapp.com/")
+	const [colors, setColors] = useState({});
+	const [users, setUsers] = useState({});
+	function makePostRequest() {
+	    axios.get("https://alteriormotive.herokuapp.com/")
 	    .then(function(response) {
-        	console.log('response', response);
+	    	setColors(response.data);
+        	console.log('response', response.data);
+        	return response;
         })
         .catch(function(error) {
         	console.log('error', error);
         })
 	}
 
-	makePostRequest();
+	function getUser(userId) {
+		axios.get(`https://alteriormotive.herokuapp.com/get-user/${userId}`)
+	    .then(function(response) {
+	    	setUsers(response.data);
+        	console.log('User response', response.data);
+        	return response;
+        })
+        .catch(function(error) {
+        	console.log('error', error);
+        })
+	}
+	useEffect(() => {
+		makePostRequest();
+		getUser(user.uid)
+	}, [user.uid])
 
 	console.log('user', user);
+	
+	let styleColors = [];
 
-	let styleColor01 = {
-		alignItems: 'center',
-		backgroundColor: 'black',
-		color: 'white',
-		height:'40px',
-		padding: '10px',
-		textAlign: 'center',
-		width: '175px'
-	}
-
-	let styleColor02 = {
-		alignItems: 'center',
-		backgroundColor: 'grey',
-		color: 'white',
-		height:'30px',
-		padding: '10px',
-		textAlign: 'center',
-		width: '175px'
-	}
-
-	let styleColor03 = {
-		alignItems: 'center',
-		backgroundColor: 'darkgrey',
-		color: 'white',
-		height:'25px',
-		padding: '10px',
-		textAlign: 'center',
-		width: '175px'
-	}
-
-	let styleColor04 = {
-		alignItems: 'center',
-		backgroundColor: 'lightgrey',
-		color: 'white',
-		height:'20px',
-		padding: '10px',
-		textAlign: 'center',
-		width: '175px'
-	}
-
+	(colors[0] && colors.map((doc, i) => {
+		let styleee = [];
+		styleee.push(doc.ColorNumOne, doc.ColorNumTwo, doc.ColorNumThree, doc.ColorNumFour);
+		styleColors.push(styleee);
+	}))
+	console.log("style colors", styleColors);
+	console.log("colors", colors);
 	return (
 		<div>
 			<div className='userBio'>
 				<h1>Profile</h1>
-				<h2>Hello, Friend{user.uid && user.name}!</h2>
+				<h2>Hello, {users.name}!</h2>
 				<h2>This is your UserID: {user.uid && user.uid}</h2>
 				<UserInformation className='email' email={user.email ? user.email : 'whoops'}/>
 			</div>
@@ -80,41 +63,17 @@ export default function UserProfile({ user }) {
 					</div>
 					<h2>Share your ideas</h2>
 				</div>
-				<div className='postsBox'>
-					<div className='styleColor' style={styleColor01}>#hex</div>
-					<div className='styleColor' style={styleColor02}>#hex</div>
-					<div className='styleColor' style={styleColor03}>#hex</div>
-					<div className='styleColor' style={styleColor04}>#hex</div>
-					<h2>Name</h2>
-				</div>
-				<div className='postsBox'>
-					<div className='styleColor' style={styleColor01}>#hex</div>
-					<div className='styleColor' style={styleColor02}>#hex</div>
-					<div className='styleColor' style={styleColor03}>#hex</div>
-					<div className='styleColor' style={styleColor04}>#hex</div>
-					<h2>Name</h2>
-				</div>
-				<div className='postsBox'>
-					<div className='styleColor' style={styleColor01}>#hex</div>
-					<div className='styleColor' style={styleColor02}>#hex</div>
-					<div className='styleColor' style={styleColor03}>#hex</div>
-					<div className='styleColor' style={styleColor04}>#hex</div>
-					<h2>Name</h2>
-				</div>
-				<div className='postsBox'>
-					<div className='styleColor' style={styleColor01}>#hex</div>
-					<div className='styleColor' style={styleColor02}>#hex</div>
-					<div className='styleColor' style={styleColor03}>#hex</div>
-					<div className='styleColor' style={styleColor04}>#hex</div>
-					<h2>Name</h2>
-				</div>
-				<div className='postsBox'>
-					<div className='styleColor' style={styleColor01}>#hex</div>
-					<div className='styleColor' style={styleColor02}>#hex</div>
-					<div className='styleColor' style={styleColor03}>#hex</div>
-					<div className='styleColor' style={styleColor04}>#hex</div>
-					<h2>Name</h2>
-				</div>
+
+					{colors[0] && styleColors.map((doc, i) =>
+						<div key={i} className='postsBox'>
+							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][0]}`}}>#{styleColors[i][0]}</div>
+							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][1]}`}}>#{styleColors[i][1]}</div>
+							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][2]}`}}>#{styleColors[i][2]}</div>
+							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][3]}`}}>#{styleColors[i][3]}</div>
+							<h2>by {users.name}</h2>
+						</div>
+	
+					)}
 			</div>
 
 		</div>

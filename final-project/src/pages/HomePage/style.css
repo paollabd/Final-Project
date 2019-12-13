@@ -25,16 +25,10 @@
 	width: 190px;
 }
 
-
-.styleColor {
+.styleColor{
+	color: white;
 	font-size: 12pt;
 	font-style: bold;
-	align-items: center;
-	color: white;
-	height:25px;
-	padding: 10px;
-	text-align: center;
-	width: 175px;
 }
 
 .submitForm {
@@ -51,7 +45,7 @@
 	margin-bottom: 20px;
 	margin-left: 190px;
 	padding-bottom: 5px;
-	width: 1055px;
+	width: 74%;
 }
 
 .userBio h1{
