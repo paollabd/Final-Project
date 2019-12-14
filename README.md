@@ -7,7 +7,7 @@ Create Account
 Logic Page
 	-styling
 
-User Profile Page:
+User Profile Page
 -User Data
 	- name
 	- email
