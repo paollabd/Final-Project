@@ -12,7 +12,7 @@ export default function AboutPage({ user }) {
 			<div className='container'>
 				<h1>Why is color palette selection important?</h1>
 				<h2>People with different types of visual impairments might not be able to tell these colors apart. 
-				Here, we have a color palette shown through the eyes of people with different types of color vision deficiency. 
+				Here, we have the same color palette shown through the eyes of people with different types of color vision deficiency. 
 				Imagine how hard it would be to distinguish data displayed with those colors.</h2>
 			</div>
 			<div className='container'>
