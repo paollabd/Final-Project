@@ -71,10 +71,18 @@ export default function HomePage({ user }) {
 
 					{colors[0] && styleColors.map((doc, i) =>
 						<div key={i} className='postsBox'>
-							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][0]}`}}>#{styleColors[i][0]}</div>
-							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][1]}`}}>#{styleColors[i][1]}</div>
-							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][2]}`}}>#{styleColors[i][2]}</div>
-							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][3]}`}}>#{styleColors[i][3]}</div>
+							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][0]}`}}>
+								<p>#{styleColors[i][0]}</p>
+							</div>
+							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][1]}`}}>
+								<p>#{styleColors[i][1]}</p>
+							</div>
+							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][2]}`}}>
+								<p>#{styleColors[i][2]}</p>
+							</div>
+							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][3]}`}}>
+								<p>#{styleColors[i][3]}</p>
+							</div>
 							<h2>by {colors[i] && colors[i].userHandle}</h2>
 						</div>
 
