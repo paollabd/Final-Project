@@ -6,45 +6,7 @@ import "./style.css"
 export default function AboutPage({ user }) {
 	const axios = require('axios');
 
-	let styleColor01 = {
-		alignItems: 'center',
-		backgroundColor: 'black',
-		color: 'white',
-		height:'40px',
-		padding: '10px',
-		textAlign: 'center',
-		width: '175px'
-	}
 
-	let styleColor02 = {
-		alignItems: 'center',
-		backgroundColor: 'grey',
-		color: 'white',
-		height:'30px',
-		padding: '10px',
-		textAlign: 'center',
-		width: '175px'
-	}
-
-	let styleColor03 = {
-		alignItems: 'center',
-		backgroundColor: 'darkgrey',
-		color: 'white',
-		height:'25px',
-		padding: '10px',
-		textAlign: 'center',
-		width: '175px'
-	}
-
-	let styleColor04 = {
-		alignItems: 'center',
-		backgroundColor: 'lightgrey',
-		color: 'white',
-		height:'20px',
-		padding: '10px',
-		textAlign: 'center',
-		width: '175px'
-	}
 	return (
 		<div>
 			<div className='container'>
