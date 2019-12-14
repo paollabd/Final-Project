@@ -1,7 +1,44 @@
+.container {
+	background-color: white;
+	border-radius: 20px;
+	color: #323232;
+	margin-bottom: 20px;
+	margin-left: 190px;
+	padding-bottom: 5px;
+	width: 1055px;
+}
+
+.container h1{
+	font-size: 16pt;
+	margin-left: 20px;
+	padding-top: 20px;
+}
+
+.container h2{
+	font-size: 14pt;
+	margin-left: 20px;
+}
+
+.containerPalette{
+	align-items: center;
+	background-color: white;
+	border-radius: 20px;
+	height: 230px;
+	margin-bottom: 25px;
+	margin-right: 25px;
+	padding-bottom: 25px;
+	padding-left: 25px;
+	padding-right: 30px;
+	padding-top: 30px;
+	text-align: center;
+	width: 190px;
+}
+
 .email {
 	margin-bottom: 20px;
 	margin-left: 20px;
 }
+
 .postsContainer{
 	display: flex;
 	flex-direction: row;
@@ -26,9 +63,19 @@
 }
 
 .styleColor{
-	color: white;
+	color: black;
 	font-size: 12pt;
 	font-style: bold;
+}
+
+.styleColor2{
+	align-items: center;
+	color: black;
+	height: 63px;
+	font-size: 12pt;
+	font-style: bold;
+	text-align: center;
+	width: 1000px;
 }
 
 .submitForm {
@@ -36,25 +83,4 @@
 	height: 170px;
 	padding: 10px;
 	width: 175px;
-}
-
-.userBio {
-	background-color: white;
-	border-radius: 20px;
-	color: #323232;
-	margin-bottom: 20px;
-	margin-left: 190px;
-	padding-bottom: 5px;
-	width: 1055px;
-}
-
-.userBio h1{
-	font-size: 16pt;
-	margin-left: 20px;
-	padding-top: 20px;
-}
-
-.userBio h2{
-	font-size: 14pt;
-	margin-left: 20px;
 }

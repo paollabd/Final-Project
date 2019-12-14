@@ -9,11 +9,13 @@ import Header from "./components/Header";
 import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
 import Signup from './pages/Signup';
-import Logout from './pages/Logout';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 
-  var firebaseConfig = {
+function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
+  const firebaseConfig = {
     apiKey: "AIzaSyAdJ7BqhuvwsCM6VYIxJmsF_V87WKz61AM",
     authDomain: "pbd244-final-project.firebaseapp.com",
     databaseURL: "https://pbd244-final-project.firebaseio.com",
@@ -23,10 +25,6 @@ import AboutPage from './pages/AboutPage';
     appId: "1:672333688295:web:fa193762b76bb041892142",
     measurementId: "G-1WM6BX334N"
   };
-
-function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState({});
 
   useEffect(() => {
     // initialize firebase
@@ -102,7 +100,6 @@ function App() {
   }
 
   function logoutFunction() {
-    
     firebase.auth().signOut().then(function() {
       // sign out successful.
       setLoggedIn(false);
@@ -120,7 +117,7 @@ function App() {
             <HomePage user={user} /> 
           </Route>
           <Route exact path="/profile">
-           { loggedIn ? <UserProfile user={user} /> : <Redirect to="/profile" /> }
+           { loggedIn ? <UserProfile user={user} /> : <AboutPage user={user} /> }
           </Route>
           <Route exact path="/signup">
            { loggedIn ? <Redirect to="/" /> : <Signup signupFunction={signupFunction}/>}

@@ -12,8 +12,8 @@ export default function UserProfile({ user }) {
 	function makePostRequest() {
 	    axios.get("https://alteriormotive.herokuapp.com/")
 	    .then(function(response) {
+	    	console.log('response', response.data);
 	    	setColors(response.data);
-        	console.log('response', response.data);
         	return response;
         })
         .catch(function(error) {
@@ -34,32 +34,40 @@ export default function UserProfile({ user }) {
 	}
 	useEffect(() => {
 		makePostRequest();
-		getUser(user.uid)
+		getUser(user.uid);
 	}, [user.uid])
 
 	console.log('user', user);
-	
-	let styleColors = [];
 
+	let styleColors = [];
+	let userName;
 	(colors[0] && colors.map((doc, i) => {
 		let styleee = [];
-		styleee.push(doc.ColorNumOne, doc.ColorNumTwo, doc.ColorNumThree, doc.ColorNumFour);
-		styleColors.push(styleee);
+		// if(doc.userHandle === users.name) {
+		// 	styleee.push(doc.ColorNumOne, doc.ColorNumTwo, doc.ColorNumThree, doc.ColorNumFour);
+		// 	styleColors.push(styleee);
+		// }
+		if(user.uid === doc.userID) {
+			userName = doc.userHandle;
+			styleee.push(doc.ColorNumOne, doc.ColorNumTwo, doc.ColorNumThree, doc.ColorNumFour);
+			// console.log("pushhhh", doc.userHandle);
+			styleColors.push(styleee);
+		}
 	}))
-	console.log("style colors", styleColors);
+	// console.log("style colors", styleColors);
 	console.log("colors", colors);
 	return (
 		<div>
 			<div className='userBio'>
 				<h1>Profile</h1>
-				<h2>Hello, {users.name}!</h2>
+				<h2>Hello, {userName}!</h2>
 				<h2>This is your UserID: {user.uid && user.uid}</h2>
 				<UserInformation className='email' email={user.email ? user.email : 'whoops'}/>
 			</div>
 			<div className='postsContainer'>
 				<div className='postsBox'>
 					<div className='submitForm'>
-						<SubmitPost className='submitForm'/>
+						<SubmitPost className='submitForm' users={users} user={user}/>
 					</div>
 					<h2>Share your ideas</h2>
 				</div>
@@ -70,7 +78,7 @@ export default function UserProfile({ user }) {
 							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][1]}`}}>#{styleColors[i][1]}</div>
 							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][2]}`}}>#{styleColors[i][2]}</div>
 							<div className='styleColor' style={{backgroundColor: `#${styleColors[i][3]}`}}>#{styleColors[i][3]}</div>
-							<h2>by {users.name}</h2>
+							<h2>by {userName}</h2>
 						</div>
 	
 					)}

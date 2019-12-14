@@ -47,7 +47,8 @@ router.get("/", (req,res) => {
 	let ColorNumTwoVal = req.query.ColorNumTwo ? req.query.ColorNumTwo : '';
 	let ColorNumThreeVal = req.query.ColorNumThree ? req.query.ColorNumThree : '';
 	let ColorNumFourVal = req.query.ColorNumFour ? req.query.ColorNumFour : '';
-	let nameVal = req.query.name ? req.query.name : '';
+	let userHandleVal = req.query.userHandle ? req.query.userHandle : '';
+	let userIDVal = req.query.userID ? req.query.userID : '';
 
 	db.collection('userPosts')
 	.add({
@@ -55,7 +56,8 @@ router.get("/", (req,res) => {
 		ColorNumTwo: ColorNumTwoVal,
 		ColorNumThree: ColorNumThreeVal,
 		ColorNumFour: ColorNumFourVal,
-		name: nameVal
+		userHandle: userHandleVal,
+		userID: userIDVal
 	})
 	.then(ref => res.send(ref)) //send the data
 	.catch(e => res.send(e));
